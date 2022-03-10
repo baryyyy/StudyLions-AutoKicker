@@ -44,6 +44,7 @@ Good luck with your studies.`
     }
 
     async monitorMembers() {
+        global.logger('info', "Monitoring members")
         let _this = this;
         _this.mutex.runExclusive(function () {
             let now = Date.now()
@@ -83,6 +84,13 @@ Good luck with your studies.`
         })
     }
     async handleAlertMembers(alertMembersList, _this) {
+        if (alertMembersList.length > 0) {
+            global.logger('info', `Alerting ${alertMembersList.length} members`)
+        } else {
+            global.logger('info', `No members to alert`)
+            return
+        }
+
         // Send alert messages to members while taking care of the discord rate limits
         const RATE_LIMIT_PER_SECOND = 30; // 30 because Discord limits to 50 requests per second
         let rateLimitCounter = 0;
@@ -105,6 +113,13 @@ Good luck with your studies.`
         }
     }
     handleInactiveMembers(inactiveMembersList) {
+        if (inactiveMembersList.length > 0) {
+            global.logger('info', `Removing ${inactiveMembersList.length} members`)
+        } else {
+            global.logger('info', `No members to remove`)
+            return
+        }
+
         let guild = global.client.guilds.cache.get(global.getConfig.mainGuild)
         if (global.db.get(`messageKickList_${guild.id}`)) return;
         // send 10 members to channel
