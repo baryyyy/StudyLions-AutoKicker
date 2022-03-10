@@ -2,7 +2,7 @@ var log = require('terminal-kit').terminal;
 const _moment = require('moment');
 
 function getConfig() {
-    let isDevelopment = true
+    let isDevelopment = false
     if (isDevelopment) {
         return require("./Settings/development.json")
     } else {
