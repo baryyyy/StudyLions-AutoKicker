@@ -1,0 +1,5 @@
+{
+    "token": "TOKEN",
+    "mainGuild": "MAIN_GUILD",
+    "inactiveMembersChannel": "LOGS_CHANNEL"
+}
